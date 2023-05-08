@@ -1,3 +1,5 @@
+/***************************** SHA1DC DECLARATION *****************************/
+
 /***
 * Copyright 2017 Marc Stevens <marc@marc-stevens.nl>, Dan Shumow <danshu@microsoft.com>
 * Distributed under the MIT Software License.
@@ -8,13 +10,9 @@
 #ifndef SHA1DC_SHA1_H
 #define SHA1DC_SHA1_H
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
-
 #ifndef SHA1DC_NO_STANDARD_INCLUDES
 #include <stdint.h>
-#endif
+#endif /* SHA1DC_NO_STANDARD_INCLUDES */
 
 /* sha-1 compression function that takes an already expanded message, and additionally store intermediate states */
 /* only stores states ii (the state between step ii-1 and step ii) when DOSTORESTATEii is defined in ubc_check.h */
@@ -99,15 +97,11 @@ void SHA1DCUpdate(SHA1_CTX*, const char*, size_t);
 /* returns: 0 = no collision detected, otherwise = collision found => warn user for active attack */
 int  SHA1DCFinal(unsigned char[20], SHA1_CTX*);
 
-#if defined(__cplusplus)
-}
-#endif
-
 #ifdef SHA1DC_CUSTOM_TRAILING_INCLUDE_SHA1_H
 #include SHA1DC_CUSTOM_TRAILING_INCLUDE_SHA1_H
-#endif
+#endif /* SHA1DC_CUSTOM_TRAILING_INCLUDE_SHA1_H */
 
-#endif
+#endif /* SHA1DC_SHA1_H */
 /***
 * Copyright 2017 Marc Stevens <marc@marc-stevens.nl>, Dan Shumow <danshu@microsoft.com>
 * Distributed under the MIT Software License.
@@ -133,13 +127,9 @@ int  SHA1DCFinal(unsigned char[20], SHA1_CTX*);
 #ifndef SHA1DC_UBC_CHECK_H
 #define SHA1DC_UBC_CHECK_H
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
-
 #ifndef SHA1DC_NO_STANDARD_INCLUDES
 #include <stdint.h>
-#endif
+#endif /* SHA1DC_NO_STANDARD_INCLUDES */
 
 #define DVMASKSIZE 1
 typedef struct { int dvType; int dvK; int dvB; int testt; int maski; int maskb; uint32_t dm[80]; } dv_info_t;
@@ -151,15 +141,16 @@ void ubc_check(const uint32_t W[80], uint32_t dvmask[DVMASKSIZE]);
 
 #define CHECK_DVMASK(_DVMASK) (0 != _DVMASK[0])
 
-#if defined(__cplusplus)
-}
-#endif
-
 #ifdef SHA1DC_CUSTOM_TRAILING_INCLUDE_UBC_CHECK_H
 #include SHA1DC_CUSTOM_TRAILING_INCLUDE_UBC_CHECK_H
-#endif
+#endif /* SHA1DC_CUSTOM_TRAILING_INCLUDE_UBC_CHECK_H */
 
-#endif
+#endif /* SHA1DC_UBC_CHECK_H */
+
+/*************************** SHA1DC DECLARATION END ***************************/
+
+/******************************** SHA1DC SOURCE *******************************/
+
 /***
 * Copyright 2017 Marc Stevens <marc@marc-stevens.nl>, Dan Shumow (danshu@microsoft.com)
 * Distributed under the MIT Software License.
@@ -174,16 +165,16 @@ void ubc_check(const uint32_t W[80], uint32_t dvmask[DVMASKSIZE]);
 #include <stdlib.h>
 #ifdef __unix__
 #include <sys/types.h> /* make sure macros like _BIG_ENDIAN visible */
-#endif
-#endif
+#endif /* __unix__ */
+#endif /* SHA1DC_NO_STANDARD_INCLUDES */
 
 #ifdef SHA1DC_CUSTOM_INCLUDE_SHA1_C
 #include SHA1DC_CUSTOM_INCLUDE_SHA1_C
-#endif
+#endif /* SHA1DC_CUSTOM_INCLUDE_SHA1_C */
 
 #ifndef SHA1DC_INIT_SAFE_HASH_DEFAULT
 #define SHA1DC_INIT_SAFE_HASH_DEFAULT 1
-#endif
+#endif /* SHA1DC_INIT_SAFE_HASH_DEFAULT */
 
 #if (defined(__amd64__) || defined(__amd64) || defined(__x86_64__) || defined(__x86_64) || \
      defined(i386) || defined(__i386) || defined(__i386__) || defined(__i486__)  || \
@@ -2067,7 +2058,7 @@ int SHA1DCFinal(unsigned char output[20], SHA1_CTX *ctx)
 
 #ifdef SHA1DC_CUSTOM_TRAILING_INCLUDE_SHA1_C
 #include SHA1DC_CUSTOM_TRAILING_INCLUDE_SHA1_C
-#endif
+#endif /* SHA1DC_CUSTOM_TRAILING_INCLUDE_SHA1_C */
 /***
 * Copyright 2017 Marc Stevens <marc@marc-stevens.nl>, Dan Shumow <danshu@microsoft.com>
 * Distributed under the MIT Software License.
@@ -2439,3 +2430,5 @@ if (mask) {
 #ifdef SHA1DC_CUSTOM_TRAILING_INCLUDE_UBC_CHECK_C
 #include SHA1DC_CUSTOM_TRAILING_INCLUDE_UBC_CHECK_C
 #endif
+
+/****************************** SHA1DC SOURCE END *****************************/
