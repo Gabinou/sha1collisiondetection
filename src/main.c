@@ -13,7 +13,7 @@
 #include <libgen.h>
 #endif
 
-#include "sha1.h"
+#include "sha1dc.h"
 
 #ifdef _WIN32
 char* basename(char* path)

@@ -185,9 +185,6 @@ void ubc_check(const uint32_t W[80], uint32_t dvmask[DVMASKSIZE]);
 #define SHA1DC_INIT_SAFE_HASH_DEFAULT 1
 #endif
 
-#include "sha1.h"
-#include "ubc_check.h"
-
 #if (defined(__amd64__) || defined(__amd64) || defined(__x86_64__) || defined(__x86_64) || \
      defined(i386) || defined(__i386) || defined(__i386__) || defined(__i486__)  || \
      defined(__i586__) || defined(__i686__) || defined(_M_IX86) || defined(__X86__) || \
@@ -2103,7 +2100,6 @@ int SHA1DCFinal(unsigned char output[20], SHA1_CTX *ctx)
 #ifdef SHA1DC_CUSTOM_INCLUDE_UBC_CHECK_C
 #include SHA1DC_CUSTOM_INCLUDE_UBC_CHECK_C
 #endif
-#include "ubc_check.h"
 
 static const uint32_t DV_I_43_0_bit 	= (uint32_t)(1) << 0;
 static const uint32_t DV_I_44_0_bit 	= (uint32_t)(1) << 1;
